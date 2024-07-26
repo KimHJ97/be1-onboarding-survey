@@ -1,0 +1,119 @@
+### 설문조사 생성 API
+POST http://localhost:8080/api/survey
+Content-Type: application/json
+
+{
+  "title": "양식 제목",
+  "description": "양식 설명",
+  "items": [
+    {
+      "title": "단답형 항목 제목",
+      "description": "단답형 항목 설명",
+      "type": "SHORT_TEXT",
+      "required": true
+    },
+    {
+      "title": "장문형 항목 제목",
+      "description": "장문형 항목 설명",
+      "type": "LONG_TEXT",
+      "required": true
+    },
+    {
+      "title": "단일 선택 리스트 항목 제목",
+      "description": "단일 선택 리스트 항목 설명",
+      "type": "SINGLE_CHOICE",
+      "required": true,
+      "options": [
+        {
+          "text": "hello"
+        },
+        {
+          "text": "bye"
+        }
+      ]
+    },
+    {
+      "title": "단일 선택 리스트 항목 제목",
+      "description": "단일 선택 리스트 항목 설명",
+      "type": "MULTIPLE_CHOICE",
+      "required": true,
+      "options": [
+        {
+          "text": "hello"
+        },
+        {
+          "text": "bye"
+        }
+      ]
+    }
+  ]
+}
+
+### 설문조사 수정 API
+PUT http://localhost:8080/api/survey/1
+Content-Type: application/json
+
+{
+  "title": "양식 제목11",
+  "description": "양식 설명11",
+  "items": [
+    {
+      "title": "항목 제목11",
+      "description": "항목 설명11",
+      "type": "SHORT_TEXT",
+      "required": true
+    },
+    {
+      "title": "항목 제목22",
+      "description": "항목 설명22",
+      "type": "SHORT_TEXT",
+      "required": true
+    },
+    {
+      "title": "항목 제목33",
+      "description": "항목 설명33",
+      "type": "SINGLE_CHOICE",
+      "required": true,
+      "options": [
+        {
+          "text": "aa"
+        },
+        {
+          "text": "bb"
+        }
+      ]
+    }
+  ]
+}
+
+### 설문조사 응답 제출 API
+POST http://localhost:8080/api/survey/1/response/submit
+Content-Type: application/json
+
+{
+  "formId": 1,
+  "items": [
+    {
+      "itemId": 1,
+      "answer": "텍스트"
+    },
+    {
+      "itemId": 2,
+      "answer": "Option ID 값"
+    },
+    {
+      "itemId": 3,
+      "answer": "1"
+    },
+    {
+      "itemId": 4,
+      "answer": "3,4"
+    }
+  ]
+}
+
+### 설문조사 응답 조회 API
+GET http://localhost:8080/api/survey/1/response
+
+### 설문조사 응답 조회 API
+GET http://localhost:8080/api/survey/1/response?responseId=1
