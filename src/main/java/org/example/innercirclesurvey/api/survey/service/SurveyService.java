@@ -113,6 +113,12 @@ public class SurveyService {
         return SurveyResponseSubmitResponse.of(savedSurveyFormResponse.getId());
     }
 
+    /**
+     * 설문조사 항목의 타입별로 응답 내용을 검증하고, 검증에 실패하면 예외를 발생시킨다.
+     *
+     * @param formItem
+     * @param itemResponse
+     */
     public void validateItemResponseByTypeOrThrow(SurveyFormItem formItem, SurveyFormItemResponseSubmitRequest itemResponse) {
         SurveyFormItemType type = formItem.getType();
         String[] options = itemResponse.getAnswer().split(",");
@@ -145,8 +151,14 @@ public class SurveyService {
         }
     }
 
+    /**
+     * 설문조사 응답 정보를 반환한다.
+     *
+     * @param surveyId 설문조사 ID
+     * @return
+     */
     @Transactional
-    public List<SurveyFormResponseSearchResponse> searchSurveyFormResponse(Long surveyId, Long responseId) {
+    public List<SurveyFormResponseSearchResponse> searchSurveyFormResponse(Long surveyId) {
         // 설문조사 관리 조회
         Survey survey = surveyRepository.findSurveyWithFormsBySurveyId(surveyId)
                 .orElseThrow(() -> new ApiException(SurveyErrorCode.NOT_FOUND));

@@ -82,7 +82,7 @@ public class SurveyController {
     public ResponseEntity<?> searchSurveyFormResponse(
             @PathVariable("surveyId") Long surveyId,
             @RequestParam(required = false, name = "responseId") Long responseId) {
-        List<SurveyFormResponseSearchResponse> response = surveyService.searchSurveyFormResponse(surveyId, responseId);
+        List<SurveyFormResponseSearchResponse> response = surveyService.searchSurveyFormResponse(surveyId);
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
